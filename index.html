@@ -1,0 +1,43 @@
+<html>
+    <title>Challenge</title>
+    <body>
+    </body>
+    <script src="src/challenge.js"></script>
+    <script src="src/css_colors.js"></script>
+    <script src="tests/test_data.js"></script>
+    <script>
+        function getFacePointsString(graph, face) {
+            let points = "";
+            face.forEach(index=>{
+                let vert = graph.vertices[index];
+                points += `${vert[0]},${vert[1]} `;
+            })
+            return points;
+        }
+
+        function renderFaces(key, graph) {
+            let header = document.createElement('h3');
+            header.innerHTML = key;
+            document.body.appendChild(header);
+
+            let svgns = "http://www.w3.org/2000/svg";
+            let svg = document.createElementNS(svgns, 'svg');
+            svg.setAttribute("viewBox", "-2 -2 8 8");
+            svg.style.maxWidth = "500px";
+            document.body.appendChild(svg);
+
+            let facesData = findFaces(graph);
+            let colorIndex = 0;
+            facesData.faces.forEach(face=>{
+                let polygon = document.createElementNS(svgns, 'polygon');
+                polygon.setAttribute("points", getFacePointsString(graph, face.verts));
+                polygon.style.fill = CSS_COLOR_NAMES[colorIndex++];
+                svg.appendChild(polygon);
+            });
+        }
+
+        for([key,value] of Object.entries(algorithm_1_test_data)) {
+            renderFaces(key, value.graph);
+        }
+    </script>
+</html>

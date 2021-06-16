@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<html lang="en">
+    <title>Test Runner</title>
+    <body>
+    </body>
+    <script src="src/challenge.js"></script>
+    <script src="tests/test_data.js"></script>
+    <script src="tests/test_methods.js"></script>
+    <script>
+        function add_result(table, name, result, message) {
+            var nameData = document.createElement('td');
+            nameData.innerHTML = name;
+            var resultData = document.createElement('td');
+            resultData.innerHTML = result ? '&#9989;' : '&#10060;';
+            var messageData = document.createElement('td');
+            messageData.innerHTML = message;
+            var row = document.createElement('tr');
+            row.appendChild(nameData);
+            row.appendChild(resultData);
+            row.appendChild(messageData);
+            table.appendChild(row);
+        }
+
+        function run_tests(tests, testMethod) {
+            var table = document.createElement('table');
+            document.body.appendChild(table);
+            for([key,value] of Object.entries(tests)) {
+                var result = false;
+                var message = "not run";
+                try {
+                    result = testMethod(value);
+                    message = result ? "passed" : "failed"
+                } catch (error) {
+                    result = false;
+                    message = error;
+                }
+                add_result(table, key, result, message);
+            }
+            document.body.appendChild(document.createElement('hr'));
+        }
+
+        run_tests(algorithm_1_test_data, (data)=>algorithm_1_test_method(data.graph, data.expected_faces));
+        run_tests(algorithm_2_test_data, (data)=>algorithm_2_test_method(data.graph, data.faceId, data.expectedNeighbors));
+    </script>
+</html>
