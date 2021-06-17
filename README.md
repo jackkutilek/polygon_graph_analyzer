@@ -31,6 +31,6 @@ and returns an array of face identifiers corresponding to the neighboring faces 
 
 # How To Run
 
-Open index.html to see output of the main algorithm on some of the test graphs.
+Open [index.html](https://jackkutilek.github.io/polygon_graph_analyzer/index.html) to see output of the main algorithm on some of the test graphs.
 
-Open testrunner.html to see results of the included test suite.
+Open [testrunner.html](https://jackkutilek.github.io/polygon_graph_analyzer/testrunner.html) to see results of the included test suite.
